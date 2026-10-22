@@ -138,6 +138,42 @@
   border-radius: 12px;
   margin-bottom: 16px;
 }
+.agent-local-models {
+  margin: 16px 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.agent-local-models h4 {
+  margin: 0;
+}
+.agent-local-model-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+.agent-local-model {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.agent-local-model small {
+  color: var(--muted);
+}
+.agent-local-model .button {
+  white-space: normal;
+  justify-content: center;
+}
+.agent-local-model progress {
+  width: 100%;
+  accent-color: var(--accent);
+}
+.agent-local-model-status {
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
 .agent-settings label:not(.checkbox) {
   display: flex;
   flex-direction: column;

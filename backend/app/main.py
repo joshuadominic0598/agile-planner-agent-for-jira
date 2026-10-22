@@ -14,6 +14,7 @@ from pymongo.errors import PyMongoError
 
 from . import analytics, columns, fields, importer, people, references, store, workflow
 from .agent.connections import router as connections_router
+from .agent.local_models import router as local_models_router
 from .agent.routes import router as agent_router
 from .agent.routes import workspace_router as conversation_router
 from .analysis_routes import router as analysis_router
@@ -45,6 +46,7 @@ app.include_router(agent_router)
 app.include_router(conversation_router)
 
 app.include_router(connections_router)
+app.include_router(local_models_router)
 app.include_router(duplicates_router)
 app.include_router(feedback_router)
 

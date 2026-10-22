@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Check, LoaderCircle, Pencil, Plus, Trash2, X } from 'lucide-react';
 import { api } from './api';
+import LocalModels from './LocalModels';
 
 export type ModelChoice = {
   id: string;
@@ -77,25 +78,6 @@ export default function AgentConnections({
   }, []);
   const legacyChat = /^(?:ft:)?gpt-(?:3\.5|35)-turbo(?:$|[-:])/i.test(draft.model);
   const gemini = presets.find((p) => p.id === 'gemini-free-tier');
-  const nemotron = presets.find((p) => p.id === 'nemotron-cascade-8b');
-  const useNemotron = () => {
-    if (!nemotron) return;
-    setDraft({
-      ...empty,
-      name: nemotron.name,
-      provider: 'compatible',
-      model: nemotron.model,
-      base: nemotron.base,
-      api_mode: 'chat',
-      context_window: nemotron.context_window || 32768,
-    });
-    setEditing(null);
-    setShow(true);
-    setError('');
-    setNotice(
-      'Install the Nemotron Ollama model first using config/ollama/README.md, then save and test this connection.'
-    );
-  };
   const useGemini = () => {
     if (!gemini) return;
     setDraft({ ...empty, name: gemini.name, provider: 'gemini', model: gemini.model });
@@ -166,6 +148,13 @@ export default function AgentConnections({
     <section className="agent-connections" aria-label="Model connections">
       <h3>Model connections</h3>
       <p>Choose local models, your OpenAI Platform project, Azure, or Gemini.</p>
+      <LocalModels
+        onConfigured={(id) => {
+          void refresh()
+            .then(() => onChanged(id))
+            .catch((e) => setError(e.message));
+        }}
+      />
       {selected && (
         <button type="button" className="button secondary" disabled={!!testing || busy} onClick={test}>
           {testing ? <LoaderCircle size={14} className="spin" /> : <Check size={14} />}Test selected
@@ -216,12 +205,6 @@ export default function AgentConnections({
           </button>
         </div>
       ))}
-      {!show && nemotron && (
-        <button type="button" className="button secondary" disabled={busy || !!testing} onClick={useNemotron}>
-          <Plus size={14} />
-          Set up Nemotron 8B
-        </button>
-      )}
       {!show && gemini && (
         <button type="button" className="button secondary" disabled={busy || !!testing} onClick={useGemini}>
           <Plus size={14} />

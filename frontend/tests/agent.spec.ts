@@ -1432,6 +1432,87 @@ test('a failed message can be retried after configuration and response feedback 
   expect(feedback).toContainEqual({ note: 'Useful answer, add acceptance criteria next time.' });
 });
 
+for (const [id, name, model] of [
+  ['qwen3-8b', 'Qwen 8B', 'agileplanner-qwen3:8b'],
+  ['nemotron-cascade-8b', 'Nemotron 8B', 'agileplanner-nemotron-cascade:8b'],
+]) {
+  test(`local ${name} download shows progress and selects its connection`, async ({ page }) => {
+    await upload(page);
+    await enter(page);
+    let phase = 'idle';
+    const profile = {
+      id: 'downloaded-local-model',
+      name: `${name} · local`,
+      model,
+      provider: 'compatible',
+      base: 'http://127.0.0.1:11434/v1',
+      has_key: false,
+      web_enabled: false,
+      reasoning_effort: '',
+      project_id: '',
+      organization_id: '',
+    };
+    await page.route('**/api/agent/local-models', async (route) =>
+      route.fulfill({
+        json: {
+          ollama_available: true,
+          message: 'Ollama is ready.',
+          models: [
+            {
+              id,
+              name,
+              download: 'About 5 GB',
+              recommended: id === 'qwen3-8b',
+              license_url: 'https://example.invalid/license',
+              installed: phase === 'ready',
+              job:
+                phase === 'idle'
+                  ? undefined
+                  : {
+                      attempt: 'download-attempt',
+                      status: phase,
+                      message: phase === 'ready' ? 'Downloaded and connected.' : 'Downloading model files',
+                      completed: 5,
+                      total: 10,
+                      connection_id: phase === 'ready' ? profile.id : undefined,
+                    },
+            },
+          ],
+        },
+      })
+    );
+    await page.route(`**/api/agent/local-models/${id}/install`, async (route) => {
+      phase = 'downloading';
+      await route.fulfill({ status: 202, json: { attempt: 'download-attempt', status: phase } });
+    });
+    await page.route('**/api/agent/connections', async (route) =>
+      route.fulfill({ json: { profiles: phase === 'ready' ? [profile] : [], presets: [] } })
+    );
+    await page.route('**/agent/status', async (route) => {
+      const response = await route.fetch();
+      const body = await response.json();
+      await route.fulfill({
+        response,
+        json: { ...body, choices: phase === 'ready' ? [{ ...profile, web_available: false }] : [] },
+      });
+    });
+    await page.getByRole('button', { name: 'Open Sprint Agent', exact: true }).click();
+    const chat = page.locator('.agent-panel');
+    await chat.getByRole('button', { name: 'Configure agent', exact: true }).click();
+    await chat.getByRole('button', { name: `Download ${name}`, exact: true }).click();
+    await expect(chat.getByRole('progressbar', { name: `${name} download progress` })).toHaveAttribute(
+      'value',
+      '5'
+    );
+    await expect(chat.getByText('Current file: 50%')).toBeVisible();
+    phase = 'ready';
+    await expect(chat.getByText('Downloaded and connected.', { exact: true })).toBeVisible();
+    await expect(chat.getByLabel('Agent model', { exact: true })).toHaveValue(profile.id);
+    await chat.getByRole('button', { name: 'Close agent configuration' }).click();
+    await expect(chat.locator('.agent-header')).toContainText(model);
+  });
+}
+
 test('a failed request survives refresh and retries without retyping', async ({ page }) => {
   await upload(page);
   await enter(page);

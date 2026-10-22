@@ -117,10 +117,13 @@ Open **[localhost:8000](http://localhost:8000)**. Analytics needs no AI key or J
 
 ### Private local AI setup
 
-Install [Ollama](https://ollama.com/), then download a local chat model and either or both embedding models:
+Install and start [Ollama](https://ollama.com/). After loading a CSV or the demo, open **Sprint Agent → Configure → Model connections** and choose **Download Qwen 8B**. Prefer Nemotron? Choose **Download Nemotron 8B** instead. The app shows download progress, supports cancel/retry, configures a 32K window and saves/selects the connection for you. No API key or personal `.env` is needed. Then choose **Test selected connection**.
+
+Chat model downloads are about 5 GB each and reuse Ollama's cached files. Qwen 8B is the suggested starting choice; this is not a claim that it beats Nemotron in evaluation. Hardware and model loading affect response time. `make start` does not download model weights automatically.
+
+For semantic search, optionally download either or both embedding models:
 
 ```sh
-ollama pull qwen3:8b
 ollama pull embeddinggemma
 ollama pull qwen3-embedding:4b
 ```
@@ -129,7 +132,7 @@ The two embedding choices run locally without per-token API fees. [EmbeddingGemm
 
 1. Run `make start` and select **Embedding model & chunk size** while importing your Jira CSV. Keyword-only search is available immediately without any model download.
 2. Choose **Smaller** or **Larger** and prepare the index. The model and chunk policy are saved per import; the configuration steps below also cover existing imports.
-3. Connect your local chat model using **Configure → Add connection**, with the OpenAI-compatible provider, model `qwen3:8b` and base URL `http://host.docker.internal:11434/v1` for Docker Desktop. For host development, use `http://127.0.0.1:11434/v1`. No API key is needed for local Ollama. See [model setup](docs/jira_agent.md).
+3. Download/use **Qwen 8B** or **Nemotron 8B** inside **Configure → Model connections**. The app selects the correct local endpoint. Existing custom models can still use **Add model connection**. No API key is needed for local Ollama. See [model setup](docs/jira_agent.md).
 
 Both private embedding choices use local Ollama endpoints only and never fall back to cloud embedding services. Model downloads contact the model registry; ticket indexing and search run locally. If Ollama or a selected model is missing, analytics remains available and indexing shows an actionable retry message. Inputs beyond model context are rejected instead of silently truncated.
 

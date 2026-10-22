@@ -4,6 +4,12 @@
 
 The Modelfiles provide optional local chat models. `make start` does not install Ollama or download weights.
 
+## Set up from the app
+
+Install and start Ollama, run `make start`, and load a CSV or the demo. Open **Sprint Agent → Configure → Model connections**. **Download Qwen 8B** and **Download Nemotron 8B** fetch the selected model, show progress and register a local connection automatically. Use **Test selected connection** to verify tool calling. Both serve a 32,768-token context window. Downloads need approximately 5 GB each, can be cancelled/retried, and reuse cached files; weights stay in Ollama's local storage, outside Git. Closing Configure does not stop an active download. A restart marks interrupted setup as retryable.
+
+Qwen 8B is the suggested first connection for a new workspace. Existing model choices are preserved. No model-comparison winner is claimed; compare on your own evaluation dataset.
+
 | File | Model family |
 | --- | --- |
 | [nemotron-cascade-8b.Modelfile](nemotron-cascade-8b.Modelfile) | NVIDIA Nemotron Cascade 8B · community Q4_K_M quantization |
@@ -24,6 +30,6 @@ Start Ollama, then run from the repository root:
 sh scripts/setup-nemotron.sh
 ```
 
-This downloads approximately 5 GB and creates `agileplanner-nemotron-cascade:8b`, with a 32,768-token serving window, temperature 0.6 and top-p 0.95. Downloads can resume after interruption. Choose **Sprint Agent → Configure → Set up Nemotron 8B**, save, and **Test selected connection** before chatting. Existing Qwen connections remain available. The Docker preset reaches Ollama through `host.docker.internal`; native Python development uses `127.0.0.1`.
+This CLI alternative downloads approximately 5 GB and creates `agileplanner-nemotron-cascade:8b`, with a 32,768-token serving window, temperature 0.6 and top-p 0.95. Downloads can resume after interruption. In **Sprint Agent → Configure → Model connections**, choose **Use Nemotron 8B** to register the installed model, then **Test selected connection** before chatting. Existing Qwen connections remain available. Docker Desktop reaches Ollama through `host.docker.internal`; native Python development uses `127.0.0.1`.
 
 The model is [NVIDIA Nemotron-Cascade-8B](https://huggingface.co/nvidia/Nemotron-Cascade-8B), using [Bartowski’s community GGUF quantization](https://huggingface.co/bartowski/nvidia_Nemotron-Cascade-8B-GGUF). NVIDIA reports reasoning and tool-use evaluations; these do not establish which model is best for your Jira questions. The original context window is 32K; this configuration does not enable YaRN extension. Use the model’s NVIDIA Open Model License terms. Reranking and final synthesis use the selected connection; no separate Qwen model is required.

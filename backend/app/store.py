@@ -29,6 +29,9 @@ def mongo():
 def initialize():
     db = mongo()
     db.command('ping')
+    from .agent import local_models
+
+    local_models.initialize()
     for name, keys in {
         'agent_runs': [('id', 1)],
         'agent_evaluations': [('id', 1)],
