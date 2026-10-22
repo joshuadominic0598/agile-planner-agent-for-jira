@@ -26,7 +26,8 @@ if [ "${BUILD_ONLY:-0}" = "1" ]; then
   exit 0
 fi
 docker compose up --no-build -d --wait --wait-timeout 120
-url="http://localhost:${PORT:-8000}"
+address=$(docker compose port app 8000)
+url="http://localhost:${address##*:}"
 echo "AgilePlanner is ready: $url"
 if [ "${OPEN_BROWSER:-1}" = "1" ]; then
   if command -v open >/dev/null 2>&1; then
