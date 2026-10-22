@@ -1,16 +1,10 @@
 # AgilePlanner · Agentic AI for Jira & sprint planning
 
-Repository: `agile-planner-agent-for-jira`.
-
 **A little less noise. Good decisions start with a clearer picture.**
 
-An AI agent that investigates Jira work, backed by project analytics, backlog planning and an LLMOps workspace.
+Meet **Sprint Agent**: investigate Jira work, plan your backlog and improve AI answers with built-in monitoring and evaluation.
 
-> **BUILT FOR PRIVATE AI ON YOUR JIRA TICKETS.** Run chat and semantic search on your own device with Ollama: **no paid AI API, no Jira credentials, and no ticket data sent to a cloud AI service in the local setup.** Imported tickets, vectors, conversations and local monitoring stay on your machine. Download the models once, then run local inference without an internet connection. Your hardware and electricity still have a cost.
-
-**Choose your free local embedding model:** smaller **EmbeddingGemma** with **1,000-character chunks / 200-character overlap**, or larger **Qwen3 Embedding 4B** with **3,000-character chunks / 500-character overlap**. Choose during import or under **Sprint Agent → Configure**. [Embedding models and configuration](#embedding-models-and-configuration).
-
-For an entirely private workflow, use a local chat model too, keep public web search off, and leave external tracing unconfigured. Hosted chat connections, legacy hosted embedding configuration, cloud tracing and remote evaluation judges are optional integrations; enabling them can send ticket context to those services. [Private local setup](#private-local-ai-setup).
+> **Your tickets. Your AI.** Run chat and semantic search locally with Ollama—no AI API key or Jira login needed. [Get started →](#try-it)
 
 [![React](https://img.shields.io/badge/React-19-149ECA.svg?logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -49,8 +43,6 @@ For an entirely private workflow, use a local chat model too, keep public web se
 - **Manage the backlog with AI:** review ticket batches, uncover refinement gaps, group work into themes and assess suggested owners against team roles and planning budgets.
 
 Description and code drafts are requested through Sprint Agent. AI suggestions stay reviewable; they do not edit Jira or your code.
-
-For ticket improvements and solution suggestions, the agent searches similar tickets using the current ticket's summary and description, then reads relevant matches for requirements, acceptance criteria and comments. Related-ticket evidence informs suggestions; it does not prove a shared root cause or a verified fix. Narrative embeddings include `Comment`, `Comments`, `Custom field (Comment)` and `Custom field (Comments)` exports. Each chunk belongs to one ticket; short tickets remain one chunk, while larger tickets split with the same title and field headers repeated on every chunk.
 
 [Get started](#try-it) · [Agent engineering](#engineering-for-relevance-latency-and-cost) · [LLMOps workflow](#llmops-improve-your-agent-with-evidence) · [Project guides](#project-guides)
 
@@ -97,6 +89,23 @@ Move, resize or expand the chat. Resume conversations, retry failed messages and
 
 [Model setup](backend/app/agent/README.md) · [Conversation controls](docs/conversations.md) · [Retrieval design](docs/retrieval.md)
 
+#### Embedding models and configuration
+
+**Embeddings find the evidence. Your chat model writes the answer.** Choose a search profile during import or under **Sprint Agent → Configure**.
+
+| Search profile | Model | Chunk size | Overlap |
+| --- | --- | ---: | ---: |
+| **Keyword only** · no download | Local keyword search | 1,000 characters | 200 characters |
+| **Smaller** · lower memory use | EmbeddingGemma | 1,000 characters | 200 characters |
+| **Larger** · more passage context | Qwen3 Embedding 4B | 3,000 characters | 500 characters |
+
+- **Index once, reuse:** prepare after import, or select a profile and click **Rebuild ticket index**. Changing the chat model needs no rebuild; changing embeddings does.
+- **Keep tickets together:** a short ticket stays in one chunk. Larger tickets split with repeated titles and field headers; chunks never mix tickets.
+- **Retrieve the full story:** index summaries, descriptions, acceptance criteria, exported comments and attachment references. People, statuses, sprints and estimates stay queryable in MongoDB.
+- **Read related work:** for ticket improvements and solution suggestions, the agent searches similar titles/descriptions and reads relevant requirements and comments before answering.
+
+Search is ready when you see **Ticket context is ready**. The saved profile and index survive conversations, refreshes and restarts. [Retrieval details, supported comment fields & legacy configuration](docs/retrieval.md).
+
 ## Try it
 
 Start Docker Desktop, clone the repo, then run:
@@ -117,50 +126,18 @@ Open **[localhost:8000](http://localhost:8000)**. Analytics needs no AI key or J
 
 ### Private local AI setup
 
-Install and start [Ollama](https://ollama.com/). After loading a CSV or the demo, open **Sprint Agent → Configure → Model connections** and choose **Download Qwen 8B**. Prefer Nemotron? Choose **Download Nemotron 8B** instead. The app shows download progress, supports cancel/retry, configures a 32K window and saves/selects the connection for you. No API key or personal `.env` is needed. Then choose **Test selected connection**.
+Install and start [Ollama](https://ollama.com/), then:
 
-Chat model downloads are about 5 GB each and reuse Ollama's cached files. Qwen 8B is the suggested starting choice; this is not a claim that it beats Nemotron in evaluation. Hardware and model loading affect response time. `make start` does not download model weights automatically.
-
-For semantic search, optionally download either or both embedding models:
+1. Open **Sprint Agent → Configure → Model connections**.
+2. Choose **Download Qwen 8B** or **Download Nemotron 8B**. Follow progress, cancel or retry in the app; the connection is saved and selected for you.
+3. Choose **Test selected connection**. For semantic search, download an embedding model below, select its [search profile](#embedding-models-and-configuration) and prepare the index.
 
 ```sh
-ollama pull embeddinggemma
-ollama pull qwen3-embedding:4b
+ollama pull embeddinggemma       # smaller embedding model
+ollama pull qwen3-embedding:4b    # larger alternative
 ```
 
-The two embedding choices run locally without per-token API fees. [EmbeddingGemma](https://ollama.com/library/embeddinggemma) is a 300M-parameter model (about 622 MB download, Gemma terms); [Qwen3 Embedding 4B](https://huggingface.co/Qwen/Qwen3-Embedding-4B) is a larger Apache-2.0 model ([about 2.5 GB in Ollama](https://ollama.com/library/qwen3-embedding:4b)). Download size is not runtime memory usage. Quality and speed depend on your hardware and ticket vocabulary; compare retrieval on your own questions.
-
-1. Run `make start` and select **Embedding model & chunk size** while importing your Jira CSV. Keyword-only search is available immediately without any model download.
-2. Choose **Smaller** or **Larger** and prepare the index. The model and chunk policy are saved per import; the configuration steps below also cover existing imports.
-3. Download/use **Qwen 8B** or **Nemotron 8B** inside **Configure → Model connections**. The app selects the correct local endpoint. Existing custom models can still use **Add model connection**. No API key is needed for local Ollama. See [model setup](docs/jira_agent.md).
-
-Both private embedding choices use local Ollama endpoints only and never fall back to cloud embedding services. Model downloads contact the model registry; ticket indexing and search run locally. If Ollama or a selected model is missing, analytics remains available and indexing shows an actionable retry message. Inputs beyond model context are rejected instead of silently truncated.
-
-`JIRA_LOCAL_EMBEDDING_BASE_URL` configures the local Ollama endpoint independently of legacy provider settings. Compose defaults to `http://host.docker.internal:11434/v1`; direct Python development defaults to `http://127.0.0.1:11434/v1`. Only loopback / Docker host URLs are accepted for the private choices. When running the API directly on the host with a copied `.env`, set this variable to the loopback URL.
-
-### Embedding models and configuration
-
-**The embedding model finds relevant ticket passages; the chat model writes the answer.** They are separate choices. You can change the chat model without rebuilding search vectors.
-
-| Choice in the app | Embedding model | Maximum characters per chunk | Narrative overlap | Tradeoff |
-| --- | --- | ---: | ---: | --- |
-| **Keyword search only** | No model; local TF-IDF + keyword search | 1,000 | 200 | Default for new imports; no download, no semantic embeddings |
-| **Smaller** | `embeddinggemma` · local Ollama | 1,000 | 200 | Lower model memory use, focused passages |
-| **Larger** | `qwen3-embedding:4b` · local Ollama | 3,000 | 500 | More passage context, higher model memory use; may take longer |
-
-Both embedding models run locally with **no API key or per-token fees**. These are maximum **character counts, not token counts**. A smaller chunk can create more vectors, so smaller does not automatically mean faster indexing or better retrieval. Model quality and speed should be checked against your own ticket questions.
-
-**For a new import:** choose **Embedding model & chunk size** on the upload screen. Leave **Prepare the Sprint Agent index after import** checked to build immediately. If you uncheck it, the choice is still saved; prepare the index later from Sprint Agent.
-
-**For an existing import:** open **Sprint Agent → Configure**, choose the embedding profile, then click **Rebuild ticket index** or **Prepare agent index**. Selecting an option alone does not rebuild or replace the saved configuration. A model change requires rebuilding all vectors for that import; other imports keep their own choices. Search is ready when the index reports **Ticket context is ready**, with its model, ticket/chunk counts, character cap and overlap. The saved index is reused across conversations, refreshes and restarts.
-
-**What gets embedded:** each ticket's summary, description, acceptance criteria, exported comments and attachment references. `Comment`, `Comments`, `Custom field (Comment)` and `Custom field (Comments)` are supported. Attachment contents are never downloaded or embedded. People, status, sprint, estimates and other metadata remain queryable in MongoDB; IDs and project keys join results back to their original tickets.
-
-**How chunks work:** a ticket that fits stays in one chunk, even if undersized. Larger tickets split without combining content from different tickets or truncating the narrative before splitting. Every chunk repeats the title and the Description, Acceptance criteria, Comments and Attachment references headers. A field without an excerpt in that chunk is marked explicitly. Repeated titles and headers count toward the cap; the 200/500-character overlap preserves narrative text across field boundaries. Long summaries are retained in a separate full-summary field as well as the repeated short title.
-
-**From export to answer:** import complete ticket fields and metadata into MongoDB, build the per-ticket chunks, embed them with local Ollama, then store vectors and the keyword index in SQLite. Questions use the same embedding model as that import's index. Hybrid retrieval combines vector similarity with keyword matches; relevant ticket details and comments are supplied to the selected chat model for its answer. The original CSV is not reopened for each question.
-
-Older imports may show **Current server configuration**, which reflects the legacy `JIRA_EMBEDDING_*` environment settings and can include a hosted provider. Choose **Smaller** or **Larger** and rebuild to move that import to the explicit private Ollama setup. The private profiles use `JIRA_LOCAL_EMBEDDING_BASE_URL` and never inherit a hosted embedding API key or silently switch to cloud embeddings. If a model is missing, run the `ollama pull` command shown by the chooser, keep Ollama running, and retry. Analytics remains available while the index is missing, building or failed.
+Keyword search works without either download. For a private workflow, use local chat and embeddings, leave public web search off and external tracing unconfigured. [Model setup & local endpoints](docs/jira_agent.md) · [Privacy & limitations](#privacy--limitations)
 
 ## Explore the workspace
 
@@ -269,7 +246,7 @@ make restart     # restart with saved data
 make fresh-start # reset after confirmation and a private backup
 ```
 
-Private exports, prompts and conversations stay outside Git. Attachment contents aren't read; connected AI providers receive the context used for requests. Planning uses a CSV snapshot, so it cannot establish historical velocity or actual availability. AI suggestions never change Jira.
+Your imported tickets, settings, conversations and search index are saved locally. Private exports and runtime data stay outside Git.
 
 ## Project guides
 
@@ -278,3 +255,13 @@ Application code lives in `backend/` and `frontend/`; technical guides and edita
 **Sharing the project:** commit source, setup files, lockfiles, documentation and the fictional demo. Personal exports, credentials, databases, vectors, conversations, installed models and generated files stay local through `.gitignore`; private files are also excluded from Docker builds. New users run `make start` to create their own workspace. See [what to commit and how to review it](docs/repository_setup.md).
 
 [Backend & API](backend/README.md) · [Frontend](frontend/README.md) · [Agent engineering](docs/agent_engineering.md) · [Model setup](backend/app/agent/README.md) · [LLMOps](docs/llmops.md) · [Monitoring](docs/observability.md) · [Evaluation](docs/evaluation.md) · [Commands](scripts/README.md) · [Data & privacy](resources/README.md)
+
+## Privacy & limitations
+
+- **Local privacy:** with local chat, local embeddings, web search off and external tracing unconfigured, ticket context stays on your machine. Hosted chat/legacy embedding providers, cloud tracing and remote evaluation judges can receive context when enabled.
+- **Downloads & hardware:** models need internet for installation, then support offline inference. Chat downloads are about 5 GB each; EmbeddingGemma is about 622 MB and Qwen3 Embedding 4B about 2.5 GB. Runtime memory, speed and electricity costs depend on your hardware. `make start` does not download weights automatically.
+- **Model choice:** Qwen 8B is the starter suggestion, not a benchmark winner. Larger models or chunks do not guarantee better answers; compare them on your own tickets. Missing local models show a retry message and never silently fall back to cloud embeddings.
+- **Snapshot limits:** exports cannot establish historical velocity, past sprint progress or actual availability. Missing estimates remain unknown; attachment contents are not read.
+- **Review AI suggestions:** related tickets do not prove a shared cause or verified fix. Drafts and assignments need review and never change Jira or your code. Evaluation screenshots show illustrative scores, not benchmark results.
+
+[EmbeddingGemma model & terms](https://ollama.com/library/embeddinggemma) · [Qwen3 Embedding model & license](https://huggingface.co/Qwen/Qwen3-Embedding-4B) · [Data & privacy guide](resources/README.md)
