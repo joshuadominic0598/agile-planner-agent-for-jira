@@ -1,0 +1,51 @@
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:${PORT:-8000}:8000"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    environment:
+      JIRA_MONGO_URI: mongodb://mongodb:27017
+      LANGFUSE_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:-}
+      LANGFUSE_SECRET_KEY: ${LANGFUSE_SECRET_KEY:-}
+      LANGFUSE_BASE_URL: ${LANGFUSE_BASE_URL:-https://cloud.langfuse.com}
+      JIRA_MONGO_DATABASE: ${JIRA_MONGO_DATABASE:-sprintlens}
+      JIRA_AI_PROVIDER: ${JIRA_AI_PROVIDER:-disabled}
+      JIRA_AI_MODEL: ${JIRA_AI_MODEL:-}
+      JIRA_AI_MODELS: ${JIRA_AI_MODELS:-}
+      JIRA_AI_MODEL_CONTEXT_PROFILES: ${JIRA_AI_MODEL_CONTEXT_PROFILES:-}
+      JIRA_AI_MODEL_CONTEXT_WINDOWS: ${JIRA_AI_MODEL_CONTEXT_WINDOWS:-}
+      JIRA_AI_MODEL_ALIASES: ${JIRA_AI_MODEL_ALIASES:-}
+      JIRA_AI_REASONING_EFFORT: ${JIRA_AI_REASONING_EFFORT:-}
+      JIRA_AI_PROJECT_ID: ${JIRA_AI_PROJECT_ID:-}
+      JIRA_AI_ORGANIZATION_ID: ${JIRA_AI_ORGANIZATION_ID:-}
+      JIRA_AI_API_KEY: ${JIRA_AI_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      JIRA_AI_BASE_URL: ${JIRA_AI_BASE_URL:-}
+      JIRA_AI_WEB_ENABLED: ${JIRA_AI_WEB_ENABLED:-false}
+      JIRA_EMBEDDING_PROVIDER: ${JIRA_EMBEDDING_PROVIDER:-local}
+      JIRA_EMBEDDING_MODEL: ${JIRA_EMBEDDING_MODEL:-embeddinggemma}
+      JIRA_EMBEDDING_BASE_URL: ${JIRA_EMBEDDING_BASE_URL:-}
+      JIRA_EMBEDDING_API_KEY: ${JIRA_EMBEDDING_API_KEY:-}
+      JIRA_LOCAL_EMBEDDING_BASE_URL: ${JIRA_LOCAL_EMBEDDING_BASE_URL:-http://host.docker.internal:11434/v1}
+    volumes:
+      - ./resources/app:/app/resources/app
+    restart: unless-stopped
+    init: true
+
+  mongodb:
+    image: mongo:7
+    ports:
+      - "127.0.0.1:${MONGO_PORT:-27018}:27017"
+    volumes:
+      - ./resources/mongodb:/data/db
+      - ./resources/mongodb-config:/data/configdb
+    command: ["mongod", "--bind_ip_all", "--quiet"]
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped

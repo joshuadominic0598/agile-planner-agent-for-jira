@@ -1,0 +1,6 @@
+-r requirements.txt
+ragas==0.4.3
+openai>=1.109.1,<3
+# Ragas 0.4.3 imports the legacy Vertex module removed in community 0.4.
+langchain-community==0.3.31
+rapidfuzz==3.14.1

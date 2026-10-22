@@ -1,0 +1,194 @@
+{
+  "name": "AgilePlanner demo · golden conversation",
+  "notes": "Ten sequential exchanges verified against the bundled fictional 100-ticket CSV. Tests metadata, context carryover/reset, ticket details, duplicate content, sprint scope and clarification. Re-verify if the source export or planning conventions change.",
+  "source_snapshot_sha256": "5922672c4f4d0ee00e10be4d653bda9aecae8ef1412eb7166c1644118c676f2c",
+  "cases": [
+    {
+      "id": "demo-exchange-01",
+      "conversation_id": "demo-conversation",
+      "question": "Give me an overall project overview.",
+      "reference": "The fictional Nimbus Workspace export has 100 tickets: 21 To Do, 61 In Progress and 18 Done by Status Category. Detailed statuses: To Do 21, In Progress 20, Dev 20, QA 21, Prod 18. Types: 52 Stories, 27 Tasks, 13 Bugs and 8 Epics. These are snapshot distributions, not historical delivery or velocity.",
+      "reference_status": "verified",
+      "enabled": true,
+      "expected": {
+        "ticket_keys": [],
+        "clarification": false
+      },
+      "reference_contexts": [
+        "[{\"total\": 100, \"status_category\": {\"To Do\": 21, \"In Progress\": 61, \"Done\": 18}, \"status\": {\"To Do\": 21, \"In Progress\": 20, \"Dev\": 20, \"QA\": 21, \"Prod\": 18}, \"type\": {\"Epic\": 8, \"Task\": 27, \"Story\": 52, \"Bug\": 13}}]"
+      ],
+      "context_status": "verified",
+      "context_source": "Canonical rows/aggregates from bundled agileplanner-demo.csv; snapshot 5922672c4f4d0ee00e10be4d653bda9aecae8ef1412eb7166c1644118c676f2c"
+    },
+    {
+      "id": "demo-exchange-02",
+      "conversation_id": "demo-conversation",
+      "question": "Who has tickets assigned in this project?",
+      "reference": "There are 8 distinct nonblank assignees: Avery Demo, Blake Demo, Casey Demo, Devon Demo, Elliot Demo, Frankie Demo, Harper Demo and Jordan Demo. Nine tickets have no assignee. Assignment does not establish developer roles or actual availability.",
+      "reference_status": "verified",
+      "enabled": true,
+      "expected": {
+        "ticket_keys": [],
+        "clarification": false
+      },
+      "reference_contexts": [
+        "[{\"distinct_assignees\": [\"Avery Demo\", \"Blake Demo\", \"Casey Demo\", \"Devon Demo\", \"Elliot Demo\", \"Frankie Demo\", \"Harper Demo\", \"Jordan Demo\"], \"unassigned\": 9}]"
+      ],
+      "context_status": "verified",
+      "context_source": "Canonical rows/aggregates from bundled agileplanner-demo.csv; snapshot 5922672c4f4d0ee00e10be4d653bda9aecae8ef1412eb7166c1644118c676f2c"
+    },
+    {
+      "id": "demo-exchange-03",
+      "conversation_id": "demo-conversation",
+      "question": "What does Blake Demo usually work on?",
+      "reference": "Blake Demo has 13 assigned tickets, mainly backend/API work: pagination validation, idempotency, audit endpoints, account-creation fixes, connection reuse, contract validation, notifications, response consistency, health checks, retries and configuration validation. The mix is 8 Stories, 2 Tasks, 2 Bugs and 1 Epic. DEMO-10 and DEMO-100 are a likely duplicate pair, so 13 assignments do not imply 13 distinct work items. A saved job role cannot be inferred solely from assignments.",
+      "reference_status": "verified",
+      "enabled": true,
+      "expected": {
+        "ticket_keys": [],
+        "clarification": false
+      },
+      "reference_contexts": [
+        "[{\"Issue key\": \"DEMO-2\", \"Summary\": \"Backend delivery improvements\", \"Issue Type\": \"Epic\", \"Status\": \"In Progress\", \"Status Category\": \"In Progress\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"3\"}, {\"Issue key\": \"DEMO-10\", \"Summary\": \"Validate API pagination parameters\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-18\", \"Summary\": \"Add request idempotency keys\", \"Issue Type\": \"Task\", \"Status\": \"In Progress\", \"Status Category\": \"In Progress\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"5\"}, {\"Issue key\": \"DEMO-26\", \"Summary\": \"Implement audit event endpoints\", \"Issue Type\": \"Story\", \"Status\": \"Dev\", \"Status Category\": \"In Progress\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"\"}, {\"Issue key\": \"DEMO-34\", \"Summary\": \"Fix duplicate account creation\", \"Issue Type\": \"Story\", \"Status\": \"QA\", \"Status Category\": \"In Progress\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"8\"}, {\"Issue key\": \"DEMO-42\", \"Summary\": \"Optimize database connection reuse\", \"Issue Type\": \"Bug\", \"Status\": \"Prod\", \"Status Category\": \"Done\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"3\"}, {\"Issue key\": \"DEMO-50\", \"Summary\": \"Add API contract validation\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-58\", \"Summary\": \"Implement notification delivery\", \"Issue Type\": \"Story\", \"Status\": \"In Progress\", \"Status Category\": \"In Progress\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"5\"}, {\"Issue key\": \"DEMO-74\", \"Summary\": \"Improve error response consistency\", \"Issue Type\": \"Story\", \"Status\": \"QA\", \"Status Category\": \"In Progress\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"8\"}, {\"Issue key\": \"DEMO-82\", \"Summary\": \"Add service health checks\", \"Issue Type\": \"Story\", \"Status\": \"Prod\", \"Status Category\": \"Done\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"3\"}, {\"Issue key\": \"DEMO-90\", \"Summary\": \"Fix timeout retry handling\", \"Issue Type\": \"Task\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-98\", \"Summary\": \"Validate uploaded configuration\", \"Issue Type\": \"Bug\", \"Status\": \"In Progress\", \"Status Category\": \"In Progress\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"5\"}, {\"Issue key\": \"DEMO-100\", \"Summary\": \"Validate API pagination parameters.\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"1\"}]"
+      ],
+      "context_status": "verified",
+      "context_source": "Canonical rows/aggregates from bundled agileplanner-demo.csv; snapshot 5922672c4f4d0ee00e10be4d653bda9aecae8ef1412eb7166c1644118c676f2c"
+    },
+    {
+      "id": "demo-exchange-04",
+      "conversation_id": "demo-conversation",
+      "question": "Which of their tickets are High priority and still To Do?",
+      "reference": "Blake Demo has four High-priority To Do tickets: DEMO-10 Validate API pagination parameters; DEMO-50 Add API contract validation; DEMO-90 Fix timeout retry handling; DEMO-100 Validate API pagination parameters. Each has 1 story point. Keep the assignee context from the preceding question.",
+      "reference_status": "verified",
+      "enabled": true,
+      "expected": {
+        "ticket_keys": [
+          "DEMO-10",
+          "DEMO-50",
+          "DEMO-90",
+          "DEMO-100"
+        ],
+        "clarification": false
+      },
+      "reference_contexts": [
+        "[{\"Issue key\": \"DEMO-10\", \"Summary\": \"Validate API pagination parameters\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-50\", \"Summary\": \"Add API contract validation\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-90\", \"Summary\": \"Fix timeout retry handling\", \"Issue Type\": \"Task\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-100\", \"Summary\": \"Validate API pagination parameters.\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"1\"}]"
+      ],
+      "context_status": "verified",
+      "context_source": "Canonical rows/aggregates from bundled agileplanner-demo.csv; snapshot 5922672c4f4d0ee00e10be4d653bda9aecae8ef1412eb7166c1644118c676f2c"
+    },
+    {
+      "id": "demo-exchange-05",
+      "conversation_id": "demo-conversation",
+      "question": "Explain DEMO-10, including its parent, acceptance criteria and attachments.",
+      "reference": "DEMO-10, Validate API pagination parameters, is a To Do Story assigned to Blake Demo, reported by Robin Demo, High priority and estimated at 1 point. It belongs to Iteration 1 and its parent is DEMO-2, Backend delivery improvements. It validates backend API pagination parameters for reliability, observable behavior and compatibility with the existing service contract. Acceptance criteria cover normal and empty inputs, clear failure messages with consistent state, checks passing and documentation. Its comment records review of the backend approach using synthetic fixtures. No attachment references or explicit related-issue links are exported for this ticket. Attachment contents cannot be inspected.",
+      "reference_status": "verified",
+      "enabled": true,
+      "expected": {
+        "ticket_keys": [
+          "DEMO-10",
+          "DEMO-2"
+        ],
+        "clarification": false
+      },
+      "reference_contexts": [
+        "[{\"Issue key\": \"DEMO-10\", \"Issue id\": \"10010\", \"Summary\": \"Validate API pagination parameters\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Project key\": \"DEMO\", \"Project name\": \"Nimbus Workspace (fictional)\", \"Description\": \"Validate API pagination parameters for the fictional Nimbus Workspace software platform. This backend work improves reliability and makes behavior observable. Keep the change compatible with the existing service contract. No customer or production data is included.\", \"Custom field (Acceptance Criteria)\": \"1. The main workflow works for normal and empty inputs.\\n2. Failure cases return a clear message and leave consistent state.\\n3. Relevant checks pass and the change is documented.\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Parent\": \"2\", \"Custom field (Story Points)\": \"1\", \"Original estimate\": \"7200\", \"Remaining Estimate\": \"7200\", \"Time Spent\": \"1800\", \"Labels\": \"backend;demo\", \"Component/s\": \"Backend\", \"Custom field (Workstream)\": \"Backend\", \"Outward issue link (Relates)\": \"\", \"Created\": \"10/Jan/26 9:00 AM\", \"Updated\": \"18/Jan/26 2:00 PM\", \"Resolution\": \"\", \"sprints\": [\"Iteration 1\"], \"attachments\": [], \"comments\": [\"16/Jan/26 10:00 AM;demo-user;Reviewed the backend approach using synthetic fixtures.\"]}, {\"Issue key\": \"DEMO-2\", \"Issue id\": \"10002\", \"Summary\": \"Backend delivery improvements\", \"Issue Type\": \"Epic\", \"Status\": \"In Progress\", \"Status Category\": \"In Progress\", \"Project key\": \"DEMO\", \"Project name\": \"Nimbus Workspace (fictional)\", \"Description\": \"Backend delivery improvements for the fictional Nimbus Workspace software platform. This backend work improves reliability and makes behavior observable. Keep the change compatible with the existing service contract. No customer or production data is included.\", \"Custom field (Acceptance Criteria)\": \"1. The main workflow works for normal and empty inputs.\\n2. Failure cases return a clear message and leave consistent state.\\n3. Relevant checks pass and the change is documented.\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Parent\": \"\", \"Custom field (Story Points)\": \"3\", \"Original estimate\": \"21600\", \"Remaining Estimate\": \"21600\", \"Time Spent\": \"5400\", \"Labels\": \"backend;demo\", \"Component/s\": \"Backend\", \"Custom field (Workstream)\": \"Backend\", \"Outward issue link (Relates)\": \"\", \"Created\": \"10/Jan/26 9:00 AM\", \"Updated\": \"18/Jan/26 2:00 PM\", \"Resolution\": \"\", \"sprints\": [\"Iteration 1\"], \"attachments\": [], \"comments\": [\"16/Jan/26 10:00 AM;demo-user;Reviewed the backend approach using synthetic fixtures.\"]}]"
+      ],
+      "context_status": "verified",
+      "context_source": "Canonical rows/aggregates from bundled agileplanner-demo.csv; snapshot 5922672c4f4d0ee00e10be4d653bda9aecae8ef1412eb7166c1644118c676f2c"
+    },
+    {
+      "id": "demo-exchange-06",
+      "conversation_id": "demo-conversation",
+      "question": "Is there another To Do ticket almost identical to that one?",
+      "reference": "DEMO-100 is a likely duplicate of DEMO-10: the same description and acceptance criteria, with the same title apart from final punctuation. Both are To Do and assigned to Blake Demo. DEMO-100 was reported by Skyler Demo and is in Iteration 5, while DEMO-10 was reported by Robin Demo and is in Iteration 1. Review before merging or deleting; no ticket is changed automatically.",
+      "reference_status": "verified",
+      "enabled": true,
+      "expected": {
+        "ticket_keys": [
+          "DEMO-100"
+        ],
+        "clarification": false
+      },
+      "reference_contexts": [
+        "[{\"Issue key\": \"DEMO-10\", \"Issue id\": \"10010\", \"Summary\": \"Validate API pagination parameters\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Project key\": \"DEMO\", \"Project name\": \"Nimbus Workspace (fictional)\", \"Description\": \"Validate API pagination parameters for the fictional Nimbus Workspace software platform. This backend work improves reliability and makes behavior observable. Keep the change compatible with the existing service contract. No customer or production data is included.\", \"Custom field (Acceptance Criteria)\": \"1. The main workflow works for normal and empty inputs.\\n2. Failure cases return a clear message and leave consistent state.\\n3. Relevant checks pass and the change is documented.\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Parent\": \"2\", \"Custom field (Story Points)\": \"1\", \"Original estimate\": \"7200\", \"Remaining Estimate\": \"7200\", \"Time Spent\": \"1800\", \"Labels\": \"backend;demo\", \"Component/s\": \"Backend\", \"Custom field (Workstream)\": \"Backend\", \"Outward issue link (Relates)\": \"\", \"Created\": \"10/Jan/26 9:00 AM\", \"Updated\": \"18/Jan/26 2:00 PM\", \"Resolution\": \"\", \"sprints\": [\"Iteration 1\"], \"attachments\": [], \"comments\": [\"16/Jan/26 10:00 AM;demo-user;Reviewed the backend approach using synthetic fixtures.\"]}, {\"Issue key\": \"DEMO-100\", \"Issue id\": \"10100\", \"Summary\": \"Validate API pagination parameters.\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Project key\": \"DEMO\", \"Project name\": \"Nimbus Workspace (fictional)\", \"Description\": \"Validate API pagination parameters for the fictional Nimbus Workspace software platform. This backend work improves reliability and makes behavior observable. Keep the change compatible with the existing service contract. No customer or production data is included.\", \"Custom field (Acceptance Criteria)\": \"1. The main workflow works for normal and empty inputs.\\n2. Failure cases return a clear message and leave consistent state.\\n3. Relevant checks pass and the change is documented.\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"High\", \"Parent\": \"2\", \"Custom field (Story Points)\": \"1\", \"Original estimate\": \"7200\", \"Remaining Estimate\": \"7200\", \"Time Spent\": \"1800\", \"Labels\": \"demo-duplicate-review\", \"Component/s\": \"Backend\", \"Custom field (Workstream)\": \"Backend\", \"Outward issue link (Relates)\": \"\", \"Created\": \"10/Jan/26 9:00 AM\", \"Updated\": \"18/Jan/26 2:00 PM\", \"Resolution\": \"\", \"sprints\": [\"Iteration 5\"], \"attachments\": [], \"comments\": [\"16/Jan/26 10:00 AM;demo-user;Reviewed the backend approach using synthetic fixtures.\"]}]"
+      ],
+      "context_status": "verified",
+      "context_source": "Canonical rows/aggregates from bundled agileplanner-demo.csv; snapshot 5922672c4f4d0ee00e10be4d653bda9aecae8ef1412eb7166c1644118c676f2c"
+    },
+    {
+      "id": "demo-exchange-07",
+      "conversation_id": "demo-conversation",
+      "question": "Now summarize Iteration 5 overall, not just Blake’s tickets.",
+      "reference": "Iteration 5 has 20 tickets across all assignees. Each detailed status has 4 tickets: To Do, In Progress, Dev, QA and Prod. Status Category totals are 4 To Do, 12 In Progress and 4 Done. Clear the inherited person filter. The export only establishes current status and sprint membership, not historical throughput or delay.",
+      "reference_status": "verified",
+      "enabled": true,
+      "expected": {
+        "ticket_keys": [],
+        "clarification": false
+      },
+      "reference_contexts": [
+        "[{\"sprint\": \"Iteration 5\", \"tickets\": [{\"Issue key\": \"DEMO-81\", \"Summary\": \"Optimize long list rendering\", \"Issue Type\": \"Task\", \"Status\": \"Dev\", \"Status Category\": \"In Progress\", \"Assignee\": \"Avery Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Medium\", \"Custom field (Story Points)\": \"2\"}, {\"Issue key\": \"DEMO-82\", \"Summary\": \"Add service health checks\", \"Issue Type\": \"Story\", \"Status\": \"Prod\", \"Status Category\": \"Done\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"3\"}, {\"Issue key\": \"DEMO-83\", \"Summary\": \"Add pipeline retry checkpoints\", \"Issue Type\": \"Story\", \"Status\": \"In Progress\", \"Status Category\": \"In Progress\", \"Assignee\": \"Casey Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Highest\", \"Custom field (Story Points)\": \"5\"}, {\"Issue key\": \"DEMO-84\", \"Summary\": \"Add metric anomaly checks\", \"Issue Type\": \"Bug\", \"Status\": \"QA\", \"Status Category\": \"In Progress\", \"Assignee\": \"Devon Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"Low\", \"Custom field (Story Points)\": \"8\"}, {\"Issue key\": \"DEMO-85\", \"Summary\": \"Add deployment rollback steps\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Elliot Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Medium\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-86\", \"Summary\": \"Verify database migration rollback\", \"Issue Type\": \"Story\", \"Status\": \"Dev\", \"Status Category\": \"In Progress\", \"Assignee\": \"Frankie Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"2\"}, {\"Issue key\": \"DEMO-87\", \"Summary\": \"Compare compression settings\", \"Issue Type\": \"Task\", \"Status\": \"Prod\", \"Status Category\": \"Done\", \"Assignee\": \"Harper Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Highest\", \"Custom field (Story Points)\": \"3\"}, {\"Issue key\": \"DEMO-88\", \"Summary\": \"Add operational runbooks\", \"Issue Type\": \"Story\", \"Status\": \"In Progress\", \"Status Category\": \"In Progress\", \"Assignee\": \"\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Low\", \"Custom field (Story Points)\": \"5\"}, {\"Issue key\": \"DEMO-89\", \"Summary\": \"Polish empty states\", \"Issue Type\": \"Story\", \"Status\": \"QA\", \"Status Category\": \"In Progress\", \"Assignee\": \"Avery Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Medium\", \"Custom field (Story Points)\": \"8\"}, {\"Issue key\": \"DEMO-90\", \"Summary\": \"Fix timeout retry handling\", \"Issue Type\": \"Task\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-91\", \"Summary\": \"Reconcile source and target counts\", \"Issue Type\": \"Bug\", \"Status\": \"Dev\", \"Status Category\": \"In Progress\", \"Assignee\": \"Casey Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Highest\", \"Custom field (Story Points)\": \"\"}, {\"Issue key\": \"DEMO-92\", \"Summary\": \"Reconcile financial aggregates\", \"Issue Type\": \"Story\", \"Status\": \"Prod\", \"Status Category\": \"Done\", \"Assignee\": \"Devon Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Low\", \"Custom field (Story Points)\": \"3\"}, {\"Issue key\": \"DEMO-93\", \"Summary\": \"Improve build artifact retention\", \"Issue Type\": \"Task\", \"Status\": \"In Progress\", \"Status Category\": \"In Progress\", \"Assignee\": \"Elliot Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Medium\", \"Custom field (Story Points)\": \"5\"}, {\"Issue key\": \"DEMO-94\", \"Summary\": \"Improve test fixture isolation\", \"Issue Type\": \"Story\", \"Status\": \"QA\", \"Status Category\": \"In Progress\", \"Assignee\": \"Frankie Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"8\"}, {\"Issue key\": \"DEMO-95\", \"Summary\": \"Investigate memory growth\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Harper Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Highest\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-96\", \"Summary\": \"Review dependency upgrade paths\", \"Issue Type\": \"Task\", \"Status\": \"Dev\", \"Status Category\": \"In Progress\", \"Assignee\": \"Jordan Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"Low\", \"Custom field (Story Points)\": \"2\"}, {\"Issue key\": \"DEMO-97\", \"Summary\": \"Add user preferences\", \"Issue Type\": \"Story\", \"Status\": \"Prod\", \"Status Category\": \"Done\", \"Assignee\": \"Avery Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Medium\", \"Custom field (Story Points)\": \"3\"}, {\"Issue key\": \"DEMO-98\", \"Summary\": \"Validate uploaded configuration\", \"Issue Type\": \"Bug\", \"Status\": \"In Progress\", \"Status Category\": \"In Progress\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"5\"}, {\"Issue key\": \"DEMO-99\", \"Summary\": \"Document data lineage\", \"Issue Type\": \"Task\", \"Status\": \"QA\", \"Status Category\": \"In Progress\", \"Assignee\": \"\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Highest\", \"Custom field (Story Points)\": \"8\"}, {\"Issue key\": \"DEMO-100\", \"Summary\": \"Validate API pagination parameters.\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"1\"}]}]"
+      ],
+      "context_status": "verified",
+      "context_source": "Canonical rows/aggregates from bundled agileplanner-demo.csv; snapshot 5922672c4f4d0ee00e10be4d653bda9aecae8ef1412eb7166c1644118c676f2c"
+    },
+    {
+      "id": "demo-exchange-08",
+      "conversation_id": "demo-conversation",
+      "question": "How much work in that sprint is unfinished if Prod is finished, and what needs estimation?",
+      "reference": "Using Prod as finished, 16 of Iteration 5’s 20 tickets are unfinished (80%). To Do, In Progress, Dev and QA remain unfinished. DEMO-91, Reconcile source and target counts, has no story-point estimate; it is a Dev Bug. Missing estimates are unknown, not zero. Do not forecast completion time or developer availability without capacity and availability rules.",
+      "reference_status": "verified",
+      "enabled": true,
+      "expected": {
+        "ticket_keys": [
+          "DEMO-91"
+        ],
+        "clarification": false
+      },
+      "reference_contexts": [
+        "[{\"unfinished_rule\": \"Status is not Prod\", \"sprint\": \"Iteration 5\", \"unfinished\": [{\"Issue key\": \"DEMO-81\", \"Summary\": \"Optimize long list rendering\", \"Issue Type\": \"Task\", \"Status\": \"Dev\", \"Status Category\": \"In Progress\", \"Assignee\": \"Avery Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Medium\", \"Custom field (Story Points)\": \"2\"}, {\"Issue key\": \"DEMO-83\", \"Summary\": \"Add pipeline retry checkpoints\", \"Issue Type\": \"Story\", \"Status\": \"In Progress\", \"Status Category\": \"In Progress\", \"Assignee\": \"Casey Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Highest\", \"Custom field (Story Points)\": \"5\"}, {\"Issue key\": \"DEMO-84\", \"Summary\": \"Add metric anomaly checks\", \"Issue Type\": \"Bug\", \"Status\": \"QA\", \"Status Category\": \"In Progress\", \"Assignee\": \"Devon Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"Low\", \"Custom field (Story Points)\": \"8\"}, {\"Issue key\": \"DEMO-85\", \"Summary\": \"Add deployment rollback steps\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Elliot Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Medium\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-86\", \"Summary\": \"Verify database migration rollback\", \"Issue Type\": \"Story\", \"Status\": \"Dev\", \"Status Category\": \"In Progress\", \"Assignee\": \"Frankie Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"2\"}, {\"Issue key\": \"DEMO-88\", \"Summary\": \"Add operational runbooks\", \"Issue Type\": \"Story\", \"Status\": \"In Progress\", \"Status Category\": \"In Progress\", \"Assignee\": \"\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Low\", \"Custom field (Story Points)\": \"5\"}, {\"Issue key\": \"DEMO-89\", \"Summary\": \"Polish empty states\", \"Issue Type\": \"Story\", \"Status\": \"QA\", \"Status Category\": \"In Progress\", \"Assignee\": \"Avery Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Medium\", \"Custom field (Story Points)\": \"8\"}, {\"Issue key\": \"DEMO-90\", \"Summary\": \"Fix timeout retry handling\", \"Issue Type\": \"Task\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-91\", \"Summary\": \"Reconcile source and target counts\", \"Issue Type\": \"Bug\", \"Status\": \"Dev\", \"Status Category\": \"In Progress\", \"Assignee\": \"Casey Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Highest\", \"Custom field (Story Points)\": \"\"}, {\"Issue key\": \"DEMO-93\", \"Summary\": \"Improve build artifact retention\", \"Issue Type\": \"Task\", \"Status\": \"In Progress\", \"Status Category\": \"In Progress\", \"Assignee\": \"Elliot Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Medium\", \"Custom field (Story Points)\": \"5\"}, {\"Issue key\": \"DEMO-94\", \"Summary\": \"Improve test fixture isolation\", \"Issue Type\": \"Story\", \"Status\": \"QA\", \"Status Category\": \"In Progress\", \"Assignee\": \"Frankie Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"8\"}, {\"Issue key\": \"DEMO-95\", \"Summary\": \"Investigate memory growth\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Harper Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Highest\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-96\", \"Summary\": \"Review dependency upgrade paths\", \"Issue Type\": \"Task\", \"Status\": \"Dev\", \"Status Category\": \"In Progress\", \"Assignee\": \"Jordan Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"Low\", \"Custom field (Story Points)\": \"2\"}, {\"Issue key\": \"DEMO-98\", \"Summary\": \"Validate uploaded configuration\", \"Issue Type\": \"Bug\", \"Status\": \"In Progress\", \"Status Category\": \"In Progress\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"5\"}, {\"Issue key\": \"DEMO-99\", \"Summary\": \"Document data lineage\", \"Issue Type\": \"Task\", \"Status\": \"QA\", \"Status Category\": \"In Progress\", \"Assignee\": \"\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Highest\", \"Custom field (Story Points)\": \"8\"}, {\"Issue key\": \"DEMO-100\", \"Summary\": \"Validate API pagination parameters.\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"1\"}], \"unestimated\": [{\"Issue key\": \"DEMO-91\", \"Summary\": \"Reconcile source and target counts\", \"Issue Type\": \"Bug\", \"Status\": \"Dev\", \"Status Category\": \"In Progress\", \"Assignee\": \"Casey Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Highest\", \"Custom field (Story Points)\": \"\"}]}]"
+      ],
+      "context_status": "verified",
+      "context_source": "Canonical rows/aggregates from bundled agileplanner-demo.csv; snapshot 5922672c4f4d0ee00e10be4d653bda9aecae8ef1412eb7166c1644118c676f2c"
+    },
+    {
+      "id": "demo-exchange-09",
+      "conversation_id": "demo-conversation",
+      "question": "List the To Do tickets in that sprint so I can inspect them.",
+      "reference": "Iteration 5 has four To Do tickets: DEMO-85, DEMO-90, DEMO-95, DEMO-100. These are all assignees, not only Blake Demo. Open a ticket to inspect its requirements.",
+      "reference_status": "verified",
+      "enabled": true,
+      "expected": {
+        "ticket_keys": [
+          "DEMO-85",
+          "DEMO-90",
+          "DEMO-95",
+          "DEMO-100"
+        ],
+        "clarification": false
+      },
+      "reference_contexts": [
+        "[{\"Issue key\": \"DEMO-85\", \"Summary\": \"Add deployment rollback steps\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Elliot Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Medium\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-90\", \"Summary\": \"Fix timeout retry handling\", \"Issue Type\": \"Task\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-95\", \"Summary\": \"Investigate memory growth\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Harper Demo\", \"Reporter\": \"Robin Demo\", \"Priority\": \"Highest\", \"Custom field (Story Points)\": \"1\"}, {\"Issue key\": \"DEMO-100\", \"Summary\": \"Validate API pagination parameters.\", \"Issue Type\": \"Story\", \"Status\": \"To Do\", \"Status Category\": \"To Do\", \"Assignee\": \"Blake Demo\", \"Reporter\": \"Skyler Demo\", \"Priority\": \"High\", \"Custom field (Story Points)\": \"1\"}]"
+      ],
+      "context_status": "verified",
+      "context_source": "Canonical rows/aggregates from bundled agileplanner-demo.csv; snapshot 5922672c4f4d0ee00e10be4d653bda9aecae8ef1412eb7166c1644118c676f2c"
+    },
+    {
+      "id": "demo-exchange-10",
+      "conversation_id": "demo-conversation",
+      "question": "Explain this ticket.",
+      "reference": "Which ticket do you mean: DEMO-85, DEMO-90, DEMO-95, DEMO-100? Ask a focused clarification because the previous response listed several tickets; do not pick one arbitrarily.",
+      "reference_status": "curated_behavior",
+      "enabled": true,
+      "expected": {
+        "ticket_keys": [],
+        "clarification": true
+      },
+      "reference_contexts": [
+        "[{\"preceding_question\": \"List the To Do tickets in that sprint so I can inspect them.\", \"preceding_expected_answer\": \"Iteration 5 has four To Do tickets: DEMO-85, DEMO-90, DEMO-95, DEMO-100. These are all assignees, not only Blake Demo. Open a ticket to inspect its requirements.\", \"ambiguous_ticket_candidates\": [\"DEMO-85\", \"DEMO-90\", \"DEMO-95\", \"DEMO-100\"]}]"
+      ],
+      "context_status": "verified",
+      "context_source": "Canonical rows/aggregates from bundled agileplanner-demo.csv; snapshot 5922672c4f4d0ee00e10be4d653bda9aecae8ef1412eb7166c1644118c676f2c"
+    }
+  ]
+}

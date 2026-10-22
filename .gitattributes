@@ -1,0 +1,2 @@
+# Keep CSV bytes stable: evaluation versions bind to export fingerprints.
+*.csv -text

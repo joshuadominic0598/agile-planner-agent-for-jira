@@ -1,0 +1,22 @@
+{
+  "verified": true,
+  "metadata_store": "mongodb",
+  "retrieval_store": "sqlite",
+  "records": {
+    "datasets": 4,
+    "issues": 8556,
+    "people": 37,
+    "workflows": 7,
+    "agent_connections": 0,
+    "agent_project_context": 2,
+    "agent_sessions": 35,
+    "agent_messages": 126,
+    "agent_session_memory": 8,
+    "agent_indices": 3,
+    "agent_chunks": 7167,
+    "agent_fts": 7167,
+    "agent_terms": 32658,
+    "agent_nodes": 6540,
+    "agent_edges": 7935
+  }
+}

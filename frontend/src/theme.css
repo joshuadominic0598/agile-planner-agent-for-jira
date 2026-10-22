@@ -1,0 +1,139 @@
+/* Shared palette */
+:root {
+  color-scheme: light;
+  --surface: #fff;
+  --surface-raised: #fbfcff;
+  --surface-code: #edf2fa;
+  --surface-info: #edf4ff;
+  --surface-selected: #e0edff;
+  --surface-neutral: #ebeff5;
+  --surface-success: #effbf4;
+  --surface-warning: #fff0e3;
+  --surface-danger: #fff0e9;
+  --surface-purple: #f4effb;
+  --surface-highlight: #fff0b3;
+  --text-secondary: #344563;
+  --text-info: #244c83;
+  --text-success: #216a48;
+  --text-warning: #854b28;
+  --text-danger: #9a3e29;
+  --text-purple: #8055ad;
+  --border-success: #c9e8d7;
+  --border-danger: #efc9ba;
+  --border-purple: #daccea;
+  --action: #0c66e4;
+  --action-hover: #0055cc;
+}
+[data-theme='dark'] {
+  color-scheme: dark;
+  --ink: #e2eaf8;
+  --muted: #a4b4cc;
+  --line: #34455e;
+  --canvas: #111b2b;
+  --surface: #1b293d;
+  --surface-raised: #213148;
+  --surface-code: #132035;
+  --surface-info: #213b60;
+  --surface-selected: #253c5c;
+  --surface-neutral: #29384d;
+  --surface-success: #193b32;
+  --surface-warning: #49351e;
+  --surface-danger: #422b2c;
+  --surface-purple: #352b49;
+  --surface-highlight: #69591e;
+  --text-secondary: #e2eaf8;
+  --text-info: #c1d8ff;
+  --text-success: #7ee2b8;
+  --text-warning: #ffcf8c;
+  --text-danger: #ffbab8;
+  --text-purple: #d1b5f4;
+  --border-success: #2f6f56;
+  --border-danger: #805159;
+  --border-purple: #695088;
+  --accent: #79afff;
+  --accent-hover: #a9ccff;
+  --accent-soft: #213b60;
+}
+
+/* Native controls and shared content */
+body {
+  background: var(--canvas);
+  color: var(--ink);
+}
+[data-theme='dark'] :is(input, select, textarea, option) {
+  background-color: var(--surface-raised);
+  color: var(--ink);
+  border-color: var(--line);
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+.agent-message-text :is(pre, code) {
+  color: var(--ink);
+  background: var(--surface-code);
+}
+.agent-message-text pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+.agent-empty > svg,
+.agent-welcome > svg {
+  color: var(--accent);
+}
+.agent-prompts button:hover:not(:disabled) {
+  background: var(--surface-selected);
+  border-color: var(--accent);
+}
+.agent-prompts button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+[data-theme='dark']
+  :is(
+    .agent-history-item:hover,
+    .agent-history-item[aria-current='true'],
+    .ticket-result:hover,
+    .ticket-result[aria-selected='true'],
+    tbody tr:hover
+  ) {
+  background: var(--surface-selected);
+}
+[data-theme='dark'] .agent-user .agent-message-label {
+  color: #cfdefa;
+}
+[data-theme='dark'] .type-badge {
+  color: color-mix(in srgb, var(--type-color) 60%, white);
+}
+[data-theme='dark'] .status {
+  color: color-mix(in srgb, var(--status-color, var(--ink)) 60%, white);
+}
+[data-theme='dark'] :is(.priority-high, .priority-highest) {
+  color: var(--text-warning);
+}
+[data-theme='dark'] :is(.priority-low, .priority-lowest) {
+  color: var(--text-success);
+}
+[data-theme='dark']
+  .priority:not(.priority-high):not(.priority-highest):not(.priority-low):not(.priority-lowest) {
+  color: var(--muted);
+}
+[data-theme='dark'] .metric svg {
+  color: var(--muted);
+}
+[data-theme='dark'] .donut > div {
+  background: var(--surface);
+}
+.theme-toggle {
+  gap: 6px;
+}
+@media (max-width: 700px) {
+  .theme-toggle span {
+    display: none;
+  }
+  .topbar-actions {
+    gap: 7px;
+  }
+}

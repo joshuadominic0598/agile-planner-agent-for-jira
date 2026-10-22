@@ -1,0 +1,52 @@
+{
+  "verified_at": "2026-10-18T15:11:47.566075+00:00",
+  "backend_tests": 116,
+  "desktop_mobile_browser_tests": 40,
+  "typecheck_production_build": "passed",
+  "ruff_lint_and_format": "passed",
+  "prettier_format": "passed",
+  "dependency_boundaries": "Pure grouping, ranking, terminology and cache-port imports are allowlisted by AST test.",
+  "adapter_contracts": "Cached and uncached search return the same results using isolated SQLite; tool consumers share the injected cache.",
+  "host_python_audit": {
+    "source": "https://api.osv.dev/v1/querybatch",
+    "packages_checked": 27,
+    "findings": []
+  },
+  "runtime_python_audit": {
+    "source": "OSV querybatch",
+    "packages_checked": 21,
+    "findings": []
+  },
+  "frontend_audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0
+  },
+  "legacy_fernet_46_to_50": "passed",
+  "selected_source_secret_patterns": {
+    "files_checked": 47,
+    "findings": 0
+  },
+  "live": {
+    "index_preserved": true,
+    "backlog_total": 373,
+    "classified_stories": 206,
+    "partition_total": 206,
+    "theme_groups": 6,
+    "classification_words": 125,
+    "definition_words": 54,
+    "correction_words": 47,
+    "definition_charts": 0,
+    "correction_charts": 0,
+    "term_preserved": true
+  },
+  "limits": [
+    "Theme labels are suggestions, not authoritative categories.",
+    "Public definitions require supported public evidence.",
+    "Single-user localhost deployment; no authentication or tenant ownership enforcement.",
+    "No penetration test or container OS scan.",
+    "One upstream TestClient/httpx deprecation warning."
+  ]
+}

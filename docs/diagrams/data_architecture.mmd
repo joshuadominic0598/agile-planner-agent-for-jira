@@ -1,0 +1,32 @@
+---
+config:
+  theme: base
+  fontFamily: Arial, sans-serif
+  themeCSS: '.label, .nodeLabel, .edgeLabel, text, tspan { font-family: Arial, sans-serif !important; }'
+  flowchart:
+    htmlLabels: false
+    curve: linear
+    nodeSpacing: 24
+    rankSpacing: 55
+  themeVariables:
+    primaryColor: '#e9f2ff'
+    primaryTextColor: '#172b4d'
+    primaryBorderColor: '#85b8ff'
+    lineColor: '#626f86'
+---
+flowchart LR
+    CSV[Jira all-fields CSV] --> API[FastAPI upload]
+    API --> Job[Import job and validation]
+    Job --> DB[(MongoDB ticket snapshots)]
+    DB --> Analytics[Project and sprint analytics]
+    DB --> Details[Full issue details]
+    Analytics --> React[React dashboard]
+    Details --> React
+    DB --> Index[Title/description vector + keyword index]
+    DB --> Graph[Metadata relationship graph]
+    Graph --> Agent
+    Index --> Agent[Read-only agent tools]
+    Agent --> Analytics
+    Agent --> Details
+    Agent --> Chat[React chat]
+    Model[Optional model provider] <--> Agent

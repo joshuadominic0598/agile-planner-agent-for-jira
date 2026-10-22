@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "index_preserved": "ready",
+  "conversation_resume": "passed",
+  "models": [
+    {
+      "model": "qwen3:8b",
+      "context_usage": {
+        "profile": "compact",
+        "context_window": 32768,
+        "history_messages": 2,
+        "history_messages_available": 2,
+        "history_token_estimate": 290,
+        "estimator": "UTF-8 bytes / 3 plus overhead; approximate, not provider tokenization",
+        "omitted_tool_rounds": 0,
+        "request_token_estimate": 3581
+      },
+      "matching_tickets": 19,
+      "first_verified_text_seconds": 0.03,
+      "elapsed_seconds": 23.63,
+      "native_curation": true,
+      "streamed_events": 31
+    },
+    {
+      "model": "qwen3:14b",
+      "context_usage": {
+        "profile": "expanded",
+        "context_window": 40960,
+        "history_messages": 4,
+        "history_messages_available": 4,
+        "history_token_estimate": 1538,
+        "estimator": "UTF-8 bytes / 3 plus overhead; approximate, not provider tokenization",
+        "omitted_tool_rounds": 0,
+        "request_token_estimate": 4816
+      },
+      "matching_tickets": 19,
+      "first_verified_text_seconds": 0.04,
+      "elapsed_seconds": 90.65,
+      "native_curation": false,
+      "streamed_events": 38
+    }
+  ],
+  "ollama_14b_context": 40960,
+  "verified_at": "2026-10-18T11:29:24.097677+00:00",
+  "backend_tests": 104,
+  "browser_tests": 34,
+  "note": "Both models retained the same exact person/priority scope. 8B completed native curation; expanded 14B hit the bounded curation fallback on a 16 GB Mac. No ticket titles or person names are recorded here."
+}

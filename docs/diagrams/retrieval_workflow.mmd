@@ -1,0 +1,34 @@
+---
+config:
+  theme: base
+  fontFamily: Arial, sans-serif
+  themeCSS: '.label, .nodeLabel, .edgeLabel, text, tspan { font-family: Arial, sans-serif !important; }'
+  flowchart:
+    htmlLabels: false
+    curve: linear
+    nodeSpacing: 24
+    rankSpacing: 55
+  themeVariables:
+    primaryColor: '#e9f2ff'
+    primaryTextColor: '#172b4d'
+    primaryBorderColor: '#85b8ff'
+    lineColor: '#626f86'
+---
+flowchart TD
+    Q[Question + page hints] --> Route[Select analytical workflow/tools]
+    Route --> Exact[Ticket / person / sprint resolution]
+    Route --> Meta[Structured metadata query]
+    Route --> Text[Narrative search]
+    Text --> Embed[Query embedding]
+    Embed --> Cosine[Cosine vector ranking]
+    Text --> FTS[FTS5 BM25 keyword ranking]
+    Cosine --> Fuse[Reciprocal rank fusion + issue deduplication]
+    FTS --> Fuse
+    Fuse --> Details[Fetch metadata by ticket key]
+    Exact --> Details
+    Details --> Graph[Optional explicit graph traversal]
+    Meta --> Aggregate[Complete-scope counts + calculator]
+    Aggregate --> Charts[Verified charts]
+    Details --> Answer[Streamed Markdown answer + ticket sources]
+    Graph --> Answer
+    Aggregate --> Answer

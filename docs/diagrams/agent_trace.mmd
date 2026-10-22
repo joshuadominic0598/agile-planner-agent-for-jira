@@ -1,0 +1,38 @@
+---
+config:
+  theme: base
+  fontFamily: Arial, sans-serif
+  themeCSS: '.label, .nodeLabel, .edgeLabel, text, tspan { font-family: Arial, sans-serif !important; }'
+  flowchart:
+    htmlLabels: false
+    curve: linear
+  themeVariables:
+    fontFamily: Inter, Arial, sans-serif
+    primaryColor: '#e9f2ff'
+    primaryTextColor: '#172b4d'
+    primaryBorderColor: '#85b8ff'
+    lineColor: '#626f86'
+    clusterBkg: '#f7f9fc'
+    clusterBorder: '#dce4ef'
+---
+flowchart TB
+  question["Question + conversation<br/>Optional page or ticket<br/>Input screening + intent analysis"]
+  agent["Selected model + pinned prompt<br/>Clarify, query and investigate<br/>Bounded context and effort"]
+  db[("MongoDB queries<br/>Metadata + aggregates<br/>People and planning rules")]
+  retrieval[("SQLite retrieval<br/>Keywords + vectors<br/>Narrative chunks + links")]
+  tools["Analysis tools<br/>Calculator<br/>Model evidence checks"]
+  answer["Streamed AI answer<br/>Ticket sources + feedback"]
+  trace[("MongoDB trace<br/>Prompt + requests + tools<br/>Evidence, response, usage, errors")]
+  monitoring["Monitoring<br/>Conversations + response drilldown<br/>Latency, tokens, costs, feedback"]
+  evaluation["Evaluation<br/>Prompt + golden-data versions<br/>Model comparison + human review"]
+  langfuse["Langfuse (optional)<br/>Native observations + feedback<br/>Requires project credentials"]
+  question --> agent
+  agent <--> db
+  agent <--> retrieval
+  agent <--> tools
+  agent --> answer --> trace
+  agent -. "Record activity" .-> trace
+  trace --> monitoring & evaluation
+  trace -.-> langfuse
+  classDef action fill:#0c66e4,color:#fff,stroke:#0c66e4
+  class agent,answer action

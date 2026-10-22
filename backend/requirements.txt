@@ -1,0 +1,12 @@
+fastapi==0.135.1
+uvicorn==0.42.0
+python-multipart==0.0.32
+
+httpx==0.28.1
+cryptography==50.0.2
+
+pymongo==4.19.0
+langfuse==5.0.3
+better-profanity==0.7.0
+nltk==3.9.2
+rouge-score==0.1.2

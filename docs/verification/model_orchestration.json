@@ -1,0 +1,52 @@
+{
+  "elapsed_seconds": 110.4,
+  "model": "sprintlens-qwen3:8b",
+  "status": 200,
+  "events": 252,
+  "actions": [
+    "Checking the question and conversation first, then optional page hints. Search can reach the entire export.",
+    "Conversation scope: Sprint: Sprint 7",
+    "Connecting to sprintlens-qwen3:8b; preparing a grounded answer.",
+    "Model is analyzing the retrieved evidence.",
+    "The model skipped retrieval. Retrying once with a focused tool list.",
+    "Model is analyzing the retrieved evidence.",
+    "Running plan investigation.",
+    "Intent: Identify developers with planning headroom in Sprint 7 using the 10-point per developer budget \u00b7 hybrid",
+    "plan investigation: Evidence ready",
+    "Model is analyzing the retrieved evidence.",
+    "Running capacity analysis.",
+    "capacity analysis: Evidence ready",
+    "Model is analyzing the retrieved evidence."
+  ],
+  "error": null,
+  "answer": "**Sprint 7 Planning Headroom (10-point budget):**  \n\n| Developer | Committed Points | Headroom | Notes                          |  \n|-----------|------------------|----------|-------------------------------|  \n| **Alex**  | 8.0              | **2.0**  | Within budget; no unestimated tasks. |  \n| **Jordan**| 0.0              | **Unknown** | 1 unestimated task affects headroom. |  \n| **Sam**   | 13.0             | **-3.0** | Exceeds budget; no unestimated tasks. |  \n\n**Key:**  \n- **Headroom > 0**: Alex has 2 points of buffer under the 10-point rule.  \n- **Unknown**: Jordan\u2019s headroom is unresolved due to unestimated work.  \n- **Over budget**: Sam\u2019s load exceeds the 10-point cap.  \n\n\u26a0\ufe0f *Note:* Headroom reflects budget math, not calendar availability or skill alignment. Unestimated tasks (e.g., Jordan\u2019s) remain unknown and could impact planning.",
+  "tools": [
+    {
+      "tool": "plan_investigation",
+      "ok": true,
+      "result_count": 0,
+      "milliseconds": 1
+    },
+    {
+      "tool": "capacity_analysis",
+      "ok": true,
+      "result_count": 0,
+      "milliseconds": 5
+    }
+  ],
+  "charts": 0,
+  "details": false,
+  "mode": "ai",
+  "date": "2026-10-19",
+  "dataset": "Synthetic sign-in project; no private export used",
+  "verified_headroom": {
+    "Alex": 2,
+    "Sam": -3,
+    "Jordan": null
+  },
+  "limitations": [
+    "One synthetic live test, not a general accuracy benchmark.",
+    "Local 8B used a planning retry and took 110.4 seconds.",
+    "Known zero points must not imply zero committed work when estimates are missing. The final tool schema now returns committed_points=null in that case."
+  ]
+}

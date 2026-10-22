@@ -1,0 +1,27 @@
+---
+config:
+  theme: base
+  fontFamily: Arial, sans-serif
+  themeCSS: '.label, .nodeLabel, .edgeLabel, text, tspan { font-family: Arial, sans-serif !important; }'
+  flowchart:
+    htmlLabels: false
+    curve: linear
+  themeVariables:
+    fontFamily: Inter, Arial, sans-serif
+    primaryColor: '#e9f2ff'
+    primaryTextColor: '#172b4d'
+    primaryBorderColor: '#85b8ff'
+    lineColor: '#626f86'
+    clusterBkg: '#f7f9fc'
+    clusterBorder: '#dce4ef'
+---
+flowchart LR
+  tickets["1. Prepare<br/>Import Jira export<br/>Build reusable index"]
+  versions["2. Version<br/>Project guidance<br/>Golden conversations"]
+  run["3. Test<br/>Pin both revisions<br/>Try one or two models"]
+  results["4. Compare<br/>Evidence + human review<br/>Quality, latency, calls"]
+  monitor["5. Use and monitor<br/>Activate chosen prompt<br/>Trace answers + feedback"]
+  tickets --> versions --> run --> results --> monitor
+  monitor -. "Revise prompts / tests and repeat" .-> versions
+  classDef action fill:#0c66e4,color:#fff,stroke:#0c66e4
+  class run,monitor action

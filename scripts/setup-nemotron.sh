@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+cd "$(dirname "$0")/.."
+command -v ollama >/dev/null 2>&1 || { echo 'Install and start Ollama first: https://ollama.com'; exit 1; }
+ollama create agileplanner-nemotron-cascade:8b -f config/ollama/nemotron-cascade-8b.Modelfile
+echo 'Nemotron installed. In Sprint Agent → Configure, choose Set up Nemotron 8B, save, and test tool calling.'

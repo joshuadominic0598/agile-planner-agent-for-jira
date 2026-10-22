@@ -1,0 +1,39 @@
+---
+config:
+  theme: base
+  fontFamily: Arial, sans-serif
+  themeCSS: '.label, .nodeLabel, .edgeLabel, text, tspan { font-family: Arial, sans-serif !important; }'
+  flowchart:
+    htmlLabels: false
+    curve: linear
+    nodeSpacing: 14
+    rankSpacing: 30
+    wrappingWidth: 320
+    padding: 12
+  themeVariables:
+    fontSize: '14px'
+    primaryColor: '#e9f2ff'
+    primaryTextColor: '#172b4d'
+    primaryBorderColor: '#85b8ff'
+    lineColor: '#626f86'
+---
+flowchart LR
+  model["1. CHOOSE A MODEL<br/>Ollama locally, OpenAI,<br/>Azure OpenAI or Gemini"]
+  prompt["2. SHARE PROJECT KNOWLEDGE<br/>Your prompt explains goals,<br/>terminology and team agreements<br/>Save versions and test changes"]
+  context["3. SET CONTEXT AND EFFORT<br/>Conversation + optional page/tickets<br/>Low, standard or high investigation"]
+  followups["4. CHOOSE FOLLOW-UP BEHAVIOR<br/>Queue the next message<br/>or steer the current response"]
+  agent["SPRINT AGENT<br/>Applies relevant project guidance<br/>Uses skills and tools to retrieve evidence"]
+  answer["YOUR ANSWER<br/>Streams with ticket sources<br/>Ready to inspect and follow up"]
+  model --> agent
+  prompt --> agent
+  context --> agent
+  followups --> agent
+  agent --> answer
+  classDef setting fill:#e9f2ff,color:#172b4d,stroke:#85b8ff
+  classDef knowledge fill:#f1edff,color:#352c63,stroke:#9f8fef,stroke-width:2px
+  classDef action fill:#0b3481,color:#fff,stroke:#0b3481
+  classDef outcome fill:#e3fcef,color:#164b35,stroke:#57b88a
+  class model,context,followups setting
+  class prompt knowledge
+  class agent action
+  class answer outcome

@@ -1,0 +1,386 @@
+[
+  {
+    "text": "SERVICES  /  MODELS  /  TOOL CALLS  /  FEEDBACK",
+    "maxWidth": null
+  },
+  {
+    "text": "Agile Planner - LLMOps Architecture",
+    "maxWidth": null
+  },
+  {
+    "text": "Docker Compose \u00b7 local workspace",
+    "maxWidth": 380
+  },
+  {
+    "text": "01  DATA INGESTION & RETRIEVAL",
+    "maxWidth": null
+  },
+  {
+    "text": "Jira export",
+    "maxWidth": 273
+  },
+  {
+    "text": "Ticket CSV snapshot",
+    "maxWidth": 348
+  },
+  {
+    "text": "Issues \u00b7 comments \u00b7 references",
+    "maxWidth": 348
+  },
+  {
+    "text": "CSV ingestion",
+    "maxWidth": 293
+  },
+  {
+    "text": "Validate + normalize",
+    "maxWidth": 368
+  },
+  {
+    "text": "Preserve original field values",
+    "maxWidth": 368
+  },
+  {
+    "text": "MongoDB",
+    "maxWidth": 313
+  },
+  {
+    "text": "Tickets + structured metadata",
+    "maxWidth": 388
+  },
+  {
+    "text": "Persistent snapshot storage",
+    "maxWidth": 388
+  },
+  {
+    "text": "SQLite index",
+    "maxWidth": 333
+  },
+  {
+    "text": "FTS5 / BM25 + vectors",
+    "maxWidth": 408
+  },
+  {
+    "text": "Issue relationship graph",
+    "maxWidth": 408
+  },
+  {
+    "text": "Embeddings",
+    "maxWidth": 373
+  },
+  {
+    "text": "EmbeddingGemma via Ollama",
+    "maxWidth": 448
+  },
+  {
+    "text": "Local TF-IDF alternative",
+    "maxWidth": 448
+  },
+  {
+    "text": "upload",
+    "maxWidth": null
+  },
+  {
+    "text": "persist",
+    "maxWidth": null
+  },
+  {
+    "text": "build index",
+    "maxWidth": null
+  },
+  {
+    "text": "embed",
+    "maxWidth": null
+  },
+  {
+    "text": "vectors",
+    "maxWidth": null
+  },
+  {
+    "text": "02  LIVE AGENT & MODEL CALLS",
+    "maxWidth": null
+  },
+  {
+    "text": "metadata",
+    "maxWidth": null
+  },
+  {
+    "text": "retrieve",
+    "maxWidth": null
+  },
+  {
+    "text": "User",
+    "maxWidth": null
+  },
+  {
+    "text": "Project / sprint questions",
+    "maxWidth": 228
+  },
+  {
+    "text": "React workspace",
+    "maxWidth": 353
+  },
+  {
+    "text": "Analytics + Sprint Agent chat",
+    "maxWidth": 428
+  },
+  {
+    "text": "React + TypeScript",
+    "maxWidth": 428
+  },
+  {
+    "text": "Tickets \u00b7 people \u00b7 backlog",
+    "maxWidth": 428
+  },
+  {
+    "text": "ask",
+    "maxWidth": null
+  },
+  {
+    "text": "view",
+    "maxWidth": null
+  },
+  {
+    "text": "question",
+    "maxWidth": null
+  },
+  {
+    "text": "stream + sources",
+    "maxWidth": null
+  },
+  {
+    "text": "Sprint Agent",
+    "maxWidth": null
+  },
+  {
+    "text": "FastAPI / Python \u00b7 read-only orchestration",
+    "maxWidth": null
+  },
+  {
+    "text": "Scope + prompt \u2192 plan \u2192 tools \u2192 verified synthesis",
+    "maxWidth": 1004
+  },
+  {
+    "text": "Metadata tools",
+    "maxWidth": 228
+  },
+  {
+    "text": "Tickets + people",
+    "maxWidth": 274
+  },
+  {
+    "text": "Counts + filters",
+    "maxWidth": 274
+  },
+  {
+    "text": "Retrieval tools",
+    "maxWidth": 228
+  },
+  {
+    "text": "Keywords + vectors",
+    "maxWidth": 274
+  },
+  {
+    "text": "Links + reranking",
+    "maxWidth": 274
+  },
+  {
+    "text": "Analysis tools",
+    "maxWidth": 260
+  },
+  {
+    "text": "Calculator + planning",
+    "maxWidth": 306
+  },
+  {
+    "text": "Bounded memory / effort",
+    "maxWidth": 306
+  },
+  {
+    "text": "Model connections",
+    "maxWidth": null
+  },
+  {
+    "text": "Qwen3 / Nemotron",
+    "maxWidth": 390
+  },
+  {
+    "text": "Ollama \u00b7 optional local presets",
+    "maxWidth": 390
+  },
+  {
+    "text": "OpenAI Platform",
+    "maxWidth": 390
+  },
+  {
+    "text": "Azure OpenAI",
+    "maxWidth": 390
+  },
+  {
+    "text": "Google Gemini",
+    "maxWidth": 390
+  },
+  {
+    "text": "Choose one configured connection per run",
+    "maxWidth": 450
+  },
+  {
+    "text": "request",
+    "maxWidth": null
+  },
+  {
+    "text": "tool call / text",
+    "maxWidth": null
+  },
+  {
+    "text": "03  EVALUATION, MONITORING & ITERATION",
+    "maxWidth": null
+  },
+  {
+    "text": "Prompt catalog",
+    "maxWidth": 323
+  },
+  {
+    "text": "Guidance + working agreements",
+    "maxWidth": 398
+  },
+  {
+    "text": "Immutable prompt revisions",
+    "maxWidth": 398
+  },
+  {
+    "text": "Golden datasets",
+    "maxWidth": 323
+  },
+  {
+    "text": "Questions + answers + evidence",
+    "maxWidth": 398
+  },
+  {
+    "text": "Evaluation workbench",
+    "maxWidth": 473
+  },
+  {
+    "text": "Pin prompt + golden-data versions",
+    "maxWidth": 548
+  },
+  {
+    "text": "Replay agent \u00b7 compare one or two models",
+    "maxWidth": 548
+  },
+  {
+    "text": "Ragas judge \u00b7 BLEU / ROUGE",
+    "maxWidth": 548
+  },
+  {
+    "text": "Quality + latency + resource use",
+    "maxWidth": 548
+  },
+  {
+    "text": "Human review",
+    "maxWidth": 403
+  },
+  {
+    "text": "Answers + sources + ratings",
+    "maxWidth": 478
+  },
+  {
+    "text": "Choose \u201cUse for chat\u201d",
+    "maxWidth": 478
+  },
+  {
+    "text": "Activate a saved prompt revision",
+    "maxWidth": 478
+  },
+  {
+    "text": "Monitoring",
+    "maxWidth": 373
+  },
+  {
+    "text": "MongoDB traces + user feedback",
+    "maxWidth": 448
+  },
+  {
+    "text": "Latency \u00b7 tokens \u00b7 estimated cost",
+    "maxWidth": 448
+  },
+  {
+    "text": "Tool calls \u00b7 context \u00b7 errors",
+    "maxWidth": 448
+  },
+  {
+    "text": "Langfuse",
+    "maxWidth": 373
+  },
+  {
+    "text": "Optional traces + scores export",
+    "maxWidth": 370
+  },
+  {
+    "text": "pin prompt",
+    "maxWidth": null
+  },
+  {
+    "text": "pin data",
+    "maxWidth": null
+  },
+  {
+    "text": "compare",
+    "maxWidth": null
+  },
+  {
+    "text": "replay tests",
+    "maxWidth": null
+  },
+  {
+    "text": "results",
+    "maxWidth": null
+  },
+  {
+    "text": "activate prompt",
+    "maxWidth": null
+  },
+  {
+    "text": "traces + feedback",
+    "maxWidth": null
+  },
+  {
+    "text": "export",
+    "maxWidth": null
+  },
+  {
+    "text": "Human feedback \u2192 revise prompts / golden data \u2192 evaluate again",
+    "maxWidth": null
+  },
+  {
+    "text": "FLOW KEY",
+    "maxWidth": null
+  },
+  {
+    "text": "Data",
+    "maxWidth": null
+  },
+  {
+    "text": "Agent calls",
+    "maxWidth": null
+  },
+  {
+    "text": "Evaluation",
+    "maxWidth": null
+  },
+  {
+    "text": "Telemetry",
+    "maxWidth": null
+  },
+  {
+    "text": "Dashed arrows: optional export / human feedback. Models and embeddings are configured independently.",
+    "maxWidth": null
+  },
+  {
+    "text": "Read-only Jira snapshot  \u00b7  Attachment references only  \u00b7  Human-controlled prompt activation",
+    "maxWidth": null
+  },
+  {
+    "text": "AGILE PLANNER / TECHNOLOGY FLOW",
+    "maxWidth": null
+  }
+]

@@ -1,0 +1,29 @@
+---
+config:
+  theme: base
+  fontFamily: Arial, sans-serif
+  themeCSS: '.label, .nodeLabel, .edgeLabel, text, tspan { font-family: Arial, sans-serif !important; }'
+  flowchart:
+    htmlLabels: false
+    curve: linear
+    nodeSpacing: 24
+    rankSpacing: 55
+  themeVariables:
+    primaryColor: '#e9f2ff'
+    primaryTextColor: '#172b4d'
+    primaryBorderColor: '#85b8ff'
+    lineColor: '#626f86'
+---
+flowchart TD
+    CSV["Jira CSV export"] --> Import["Validate and normalize"]
+    Import --> Store["MongoDB tickets and original fields"]
+    Store --> API["FastAPI: analytics, tickets, people and configuration"]
+    API --> UI["React: Overview and Sprint explorer"]
+    Store --> Search["Narrative vectors + FTS5 keyword search"]
+    Store --> Graph["Ticket relationships and metadata graph"]
+    UI --> Chat["Sprint Agent chat"]
+    Chat --> Tools["Read-only tools, scoped memory and calculator"]
+    Tools --> API
+    Tools --> Search
+    Tools --> Graph
+    Tools <--> Model["Optional local or hosted model"]

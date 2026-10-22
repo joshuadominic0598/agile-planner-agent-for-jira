@@ -1,0 +1,14 @@
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+include = ["backend/app/agent/*.py", "backend/app/observability/*.py", "backend/app/duplicates.py", "backend/app/workspace_reset.py", "backend/tests/test_operations.py", "backend/tests/test_evaluation_workbench.py", "backend/app/main.py", "backend/app/store.py", "backend/app/vector_store.py", "backend/app/paths.py", "backend/app/legacy_migration.py", "backend/tests/conftest.py", "backend/tests/test_mongo_store.py", "backend/tests/test_reference_context.py", "backend/tests/test_agent.py", "backend/tests/test_conversations.py", "backend/tests/test_chat_experience.py", "backend/tests/test_embedding_profiles.py", "backend/tests/test_management_agent.py"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.ruff.format]
+quote-style = "single"
+skip-magic-trailing-comma = true
+
+[tool.ruff.lint.isort]
+split-on-trailing-comma = false
