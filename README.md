@@ -81,8 +81,6 @@ Streaming exposes progress while work continues. Reuse of the persisted index av
 
 **Share the knowledge behind your tickets.** Your **project knowledge prompt** explains what you're building, your goals, team terminology and working agreements. Saved guidance gives the selected model project-specific context for relevant questions.
 
-> “Our current goal is reliable sign-in. Flag work missing estimates and explain unfamiliar terms.”
-
 Find it under **Configure → Project context & working agreements**. View and edit prompt versions in **Evaluation → Project prompts**, test a change, then choose **Use for chat**.
 
 Move, resize or expand the chat. Resume conversations, retry failed messages and leave thumbs feedback or a short note. Your export, settings and retrieval index survive refreshes and restarts.
@@ -99,12 +97,7 @@ Move, resize or expand the chat. Resume conversations, retry failed messages and
 | **Smaller** · lower memory use | EmbeddingGemma | 1,000 characters | 200 characters |
 | **Larger** · more passage context | Qwen3 Embedding 4B | 3,000 characters | 500 characters |
 
-- **Index once, reuse:** prepare after import, or select a profile and click **Rebuild ticket index**. Changing the chat model needs no rebuild; changing embeddings does.
-- **Keep tickets together:** a short ticket stays in one chunk. Larger tickets split with repeated titles and field headers; chunks never mix tickets.
-- **Retrieve the full story:** index summaries, descriptions, acceptance criteria, exported comments and attachment references. People, statuses, sprints and estimates stay queryable in MongoDB.
-- **Read related work:** for ticket improvements and solution suggestions, the agent searches similar titles/descriptions and reads relevant requirements and comments before answering.
-
-Search is ready when you see **Ticket context is ready**. The saved profile and index survive conversations, refreshes and restarts. [Retrieval details, supported comment fields & legacy configuration](docs/retrieval.md).
+**Choose a profile, prepare the index and start chatting.** Your saved index is reused across conversations and restarts. [Setup, chunking & troubleshooting →](docs/retrieval.md#embedding-setup-and-chunking)
 
 ## Try it
 
